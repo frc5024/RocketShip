@@ -16,19 +16,6 @@ A camera may break or the http server may drop. In this case, the driver and hum
 ```
 Button press
 Enable LED
-Bang-Bang turn to target
-Read distance and convert to ticks
-Drive forward ticks / 2 @ 0.4 speed
-Lower finger
-PID turn to gyro 0
-Drive forward ticks / 2 @ 0.6 speed (slam) & slign slider
-pause 0.2 sec
-back up for 0.2 sec @ 0.5 speed
-
---
-
-Button press
-Enable LED
 PID turn to target
 Finger down
 drive forward and rotate and slide while encoder < length

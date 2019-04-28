@@ -97,9 +97,9 @@ class HatchLoader(StateMachine):
     def velcroPause(self):
         pass
     
-    @timed_state(duration=0.5, next_state='disableLED')
+    @timed_state(duration=0.3, next_state='disableLED')
     def pullBack(self):
-        self.drivetrain.arcadeDrive(-0.5, 0.0)
+        self.drivetrain.arcadeDrive(-0.8, 0.0)
 
     @state()
     def disableLED(self):
