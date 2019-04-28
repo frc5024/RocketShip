@@ -1,7 +1,7 @@
 {
     "pyfrc": {
         "robot": {
-        "w": 2,
+        "w": 3,
         "h": 2,
         "starting_x": 6,
         "starting_y": 10,
@@ -20,6 +20,8 @@
             "4": "Rear Right Drive Motor"
         },
         "solenoid": {
+            "0": "Ring Light",
+            "1": "Finger"
 
         },
       "field": {
