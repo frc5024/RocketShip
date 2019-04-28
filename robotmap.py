@@ -7,8 +7,8 @@ config = {
             "rr":4
         },
         "encoders": {
-            "tpr": 360
-            
+            "tpr": 360,
+            "wheel_circ_ft": 2.094395
         }
     },
     "pcm": {

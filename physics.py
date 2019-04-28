@@ -58,6 +58,6 @@ class PhysicsEngine:
         data = self.vision.compute(now, x, y, angle)
         if data is not None:
             data = data[0]
-            info = (data[0], data[2], data[3])
+            info = (data[0], data[2], data[3] * 2)
             # print(info)
             self.target = info

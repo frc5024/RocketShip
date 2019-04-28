@@ -24,11 +24,24 @@ class DriveTrain:
         self.gyro = AHRS.create_spi()
         self.gyro.reset()
 
-        self.rotation_controller = PIDController(1,1,1)
+        self.rotation_controller = PIDController(0.035, 0.020, 1)
+        
+        self.bang_bang_ticks_offset = 0
     
     def rotateToSetpoint(self):
         rotation = self.rotation_controller.Feed(self.gyro.getAngle())
         self.arcadeDrive(0.0, rotation)
+    
+    def bangBangToTicks(self, ticks, speed):
+        if self.left_gearbox.front.getSelectedSensorPosition() - self.bang_bang_ticks_offset < ticks:
+            self.arcadeDrive(speed, 0.0)
+        elif self.left_gearbox.front.getSelectedSensorPosition() - self.bang_bang_ticks_offset > ticks:
+            self.arcadeDrive(-speed, 0.0)
+        else:
+            self.arcadeDrive(0.0, 0.0)
+    
+    def resetBangBang(self):
+        self.bang_bang_ticks_offset = self.left_gearbox.front.getSelectedSensorPosition()
     
     def arcadeDrive(self, speed, rotation, is_squared=False):
         """Best drive function to use for tank drive with an xbox controller"""
