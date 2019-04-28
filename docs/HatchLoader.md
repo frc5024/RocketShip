@@ -24,4 +24,14 @@ PID turn to gyro 0
 Drive forward ticks / 2 @ 0.6 speed (slam) & slign slider
 pause 0.2 sec
 back up for 0.2 sec @ 0.5 speed
+
+--
+
+Button press
+Enable LED
+PID turn to target
+Finger down
+drive forward and rotate and slide while encoder < length
+Finger Up
+drive back at 0.8 for 0.3
 ```

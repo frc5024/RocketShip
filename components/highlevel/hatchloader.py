@@ -42,41 +42,23 @@ class HatchLoader(StateMachine):
     @state(first=True)
     def enableLED(self):
         self.led_ring.setEnabled(True)
-        self.next_state('getAngle')
+        self.next_state('findStation')
     
     @state()
-    def getAngle(self):
+    def findStation(self):
         # Only continue if a target is found, else send haptic feedback
-        print(self.target)
         if self.target[0]:
-            self.console.log(f"Rough rotation point set to {self.target[1]} degrees")
+            self.console.log(f"Rotation point set to {self.target[1]} degrees")
+            self.console.log(f"Shortest distance set to {self.target[2]} units")
             self.drivetrain.rotation_controller.setSetpoint(self.drivetrain.gyro.getAngle() + self.target[1])
             self.next_state('turn')
         else:
             self.console.log("No vision target found")
             self.next_state('vibrate')
 
-    @timed_state(duration=0.2, next_state='initNavigate')
+    @timed_state(duration=1.0, next_state='disableLED')
     def turn(self):
         self.drivetrain.rotateToSetpoint()
-
-    @state()
-    def initNavigate(self):
-        self.drivetrain.resetBangBang()
-        self.distance_ticks = (self.target[2] / config["drivetrain"]["encoders"]["wheel_circ_ft"]) * config["drivetrain"]["encoders"]["tpr"]
-        if self.first_run:
-            self.next_state('roughNavigate')
-        else:
-            self.next_state('navigate')
-
-    @timed_state(duration=0.5, next_state='getAngle')
-    def roughNavigate(self):
-        self.drivetrain.bangBangToTicks(self.distance_ticks / 2, 0.7)
-        self.first_run = False
-    
-    @timed_state(duration=0.5, next_state='disableLED')
-    def navigate(self):
-        self.drivetrain.bangBangToTicks(self.distance_ticks, 0.9)
     
     @state()
     def disableLED(self):
