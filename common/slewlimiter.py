@@ -11,3 +11,18 @@ class SlewLimiter:
             error = self.limit * -1
         self.output += error
         return self.output
+
+class MultipleSlewLimiter:
+    def __init__(self, limit):
+        self.limit = limit
+        self.output = 0.0
+    
+    def Feed(self, value):
+        error = value - self.output
+        if error > value *self.limit:
+            error = self.limit
+        elif error < (value * self.limit * -1):
+            error = self.limit * -1
+        self.output += error
+        return self.output
+        MultipleSlewLimiter

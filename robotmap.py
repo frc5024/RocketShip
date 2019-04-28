@@ -17,5 +17,11 @@ config = {
     },
     "xbox_controllers": {
         "driver": 0
+    },
+    "loading_limits": {
+        "min_angle": 2,
+        "tracking_speed": 0.5,
+        "ontrack_speed": 0.9,
+        "min_distance": 4.5
     }
 }
