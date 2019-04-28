@@ -19,9 +19,9 @@ class PhysicsEngine:
 
         targets = [
             # left loading station
-            VisionSim.Target(0, 2, 270, 90),
+            VisionSim.Target(0, 2.2, 270, 90),
             # right loading station
-            VisionSim.Target(0, 25, 270, 90)
+            VisionSim.Target(0, 24.9, 270, 90)
         ]
 
         self.vision = VisionSim(

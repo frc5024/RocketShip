@@ -13,7 +13,8 @@ config = {
     },
     "pcm": {
         "can_id": 11,
-        "light_ring": 0
+        "light_ring": 0,
+        "finger":1
     },
     "xbox_controllers": {
         "driver": 0

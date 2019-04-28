@@ -5,6 +5,7 @@ from common.logger import Logger
 
 from components.lowlevel.drivebase.drivetrain import DriveTrain
 from components.lowlevel.pneumatics.ledring import LEDRing
+from components.lowlevel.pneumatics.finger import Finger
 
 from networktables.util import ntproperty
 from common.slewlimiter import MultipleSlewLimiter
@@ -16,6 +17,7 @@ class HatchLoader(StateMachine):
     console: Logger
     drivetrain: DriveTrain
     led_ring: LEDRing
+    finger: Finger
 
     target = ntproperty("/camera/target", (0.0, 0.0, 0.0))
 
@@ -63,6 +65,7 @@ class HatchLoader(StateMachine):
     
     @state()
     def lowerFinger(self):
+        self.finger.setEnabled(False)
         self.next_state('align')
     
     def getStationPosition(self):
@@ -87,7 +90,16 @@ class HatchLoader(StateMachine):
     
     @state()
     def raiseFinger(self):
-        self.next_state('disableLED')
+        self.finger.setEnabled(True)
+        self.next_state('velcroPause')
+    
+    @timed_state(duration=0.3, next_state="pullBack")
+    def velcroPause(self):
+        pass
+    
+    @timed_state(duration=0.5, next_state='disableLED')
+    def pullBack(self):
+        self.drivetrain.arcadeDrive(-0.5, 0.0)
 
     @state()
     def disableLED(self):
