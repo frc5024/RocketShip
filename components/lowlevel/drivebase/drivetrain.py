@@ -5,6 +5,8 @@ from wpilib.drive import DifferentialDrive
 from .gearbox import GearBox
 from robotmap import config
 
+from common.stackedsystem import StackedSystem
+
 class DriveTrain:
     """Low level component for controlling the robot's drivebase"""
     def __init__(self):

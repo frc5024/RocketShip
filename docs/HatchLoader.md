@@ -11,3 +11,17 @@ HatchLoader is a FSM that autonomously aligns the robot with a loading station a
 There is a chance that the gyro may be reset during a match. To solve this, first, a raw gyro reading wil be accessed through a GyroInstance that allows scoped resets of the gyro (aka. other systems cannot interfere with eachother's gyro readings). In the worst case, if the RIO reboots during a match, Thr driver can control the slider with the right joystick and the pneumatics with the button pad.
 
 A camera may break or the http server may drop. In this case, the driver and human player must communicate to manually align the robot using the controls described above.
+
+## Procedure
+```
+Button press
+Enable LED
+Bang-Bang turn to target (-180 gyro)
+Read distance and convert to ticks
+Drive forward ticks / 2 @ 0.4 speed
+Lower finger
+PID turn to target
+Drive forward ticks / 2 @ 0.6 speed (slam) & slign slider
+pause 0.2 sec
+back up for 0.2 sec @ 0.5 speed
+```

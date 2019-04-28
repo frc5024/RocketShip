@@ -6,6 +6,7 @@ from components.lowlevel.pneumatics.compressor import Compressor
 
 from components.highlevel.triggerdrive import TriggerDrive
 from components.highlevel.controlcompressor import ControlCompressor
+from components.highlevel.hatchloader import HatchLoader
 
 from common.logger import Logger
 
@@ -19,6 +20,7 @@ class Robot(magicbot.MagicRobot):
     # High level components that require variable injection
     trigger_drive: TriggerDrive
     control_compressor: ControlCompressor
+    hatch_loader: HatchLoader
 
 
     def createObjects(self):
@@ -32,8 +34,9 @@ class Robot(magicbot.MagicRobot):
     
     def teleopPeriodic(self):
         """Called every 20ms during teleop"""
-        self.trigger_drive.execute()
-        self.control_compressor.execute()
+
+        # Execute all state machines
+        self.hatch_loader.run()
 
 
 if __name__ == "__main__":
