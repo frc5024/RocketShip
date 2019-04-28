@@ -7,6 +7,7 @@ from components.lowlevel.pneumatics.compressor import Compressor
 from components.highlevel.triggerdrive import TriggerDrive
 from components.highlevel.controlcompressor import ControlCompressor
 from components.highlevel.hatchloader import HatchLoader
+from components.lowlevel.pneumatics.ledring import LEDRing
 
 from common.logger import Logger
 
@@ -28,6 +29,7 @@ class Robot(magicbot.MagicRobot):
         self.drivetrain = DriveTrain()
         self.compressor = Compressor()
         self.console = Logger()
+        self.led_ring = LEDRing()
     
     def robotPeriodic(self):
         self.console.push()

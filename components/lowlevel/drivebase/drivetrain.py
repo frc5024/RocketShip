@@ -1,11 +1,13 @@
 import wpilib
 import ctre
+from navx import AHRS
 from wpilib.drive import DifferentialDrive
 
 from .gearbox import GearBox
 from robotmap import config
 
 from common.stackedsystem import StackedSystem
+from common.pidcontroller import PIDController
 
 class DriveTrain:
     """Low level component for controlling the robot's drivebase"""
@@ -18,6 +20,15 @@ class DriveTrain:
         
         self.drivebase = DifferentialDrive(self.left_gearbox.speedcontroller, self.right_gearbox.speedcontroller)
         self.drivebase.setSafetyEnabled(False)
+
+        self.gyro = AHRS.create_spi()
+        self.gyro.reset()
+
+        self.rotation_controller = PIDController(1,1,1)
+    
+    def rotateToSetpoint(self):
+        rotation = self.rotation_controller.Feed(self.gyro.getAngle())
+        self.arcadeDrive(0.0, rotation)
     
     def arcadeDrive(self, speed, rotation, is_squared=False):
         """Best drive function to use for tank drive with an xbox controller"""
