@@ -1,7 +1,7 @@
 import wpilib
 
 from robotmap import config
-from .drivetrain import DriveTrain
+from components.lowlevel.drivebase.drivetrain import DriveTrain
 
 from common.slewlimiter import SlewLimiter
 

@@ -11,6 +11,9 @@ config = {
             
         }
     },
+    "pcm": {
+        "can_id": 11
+    },
     "xbox_controllers": {
         "driver": 0
     }

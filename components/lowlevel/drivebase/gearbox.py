@@ -21,10 +21,10 @@ class GearBox:
         """Set to true if encoder counts down while motor spins forward"""
         self.front.setPhase(phase)
     
-    def setInverted(self, isInverted):
+    def setInverted(self, is_inverted):
         """Swaps front and back on motors"""
-        self.front.setInverted(isInverted)
-        self.back.setInverted(isInverted)
+        self.front.setInverted(is_inverted)
+        self.back.setInverted(is_inverted)
     
 
     
