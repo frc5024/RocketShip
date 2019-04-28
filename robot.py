@@ -24,6 +24,10 @@ class Robot(magicbot.MagicRobot):
     control_compressor: ControlCompressor
     hatch_loader: HatchLoader
 
+    def __init__(self):
+        super().__init__()
+        
+
 
     def createObjects(self):
         """Starts all low level components"""

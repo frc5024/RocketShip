@@ -21,7 +21,21 @@ class PhysicsEngine:
             # left loading station
             VisionSim.Target(0, 2.2, 270, 90),
             # right loading station
-            VisionSim.Target(0, 24.9, 270, 90)
+            VisionSim.Target(0, 24.9, 270, 90),
+
+            # Cargo ship left
+            VisionSim.Target(21.9, 11.5, 180, 0),
+            VisionSim.Target(23.7, 11.5, 180, 0),
+            VisionSim.Target(25.5, 11.5, 180, 0),
+
+            # Cargo ship right
+            VisionSim.Target(21.9, 15.5, 0, 180),
+            VisionSim.Target(23.7, 15.5, 0, 180),
+            VisionSim.Target(25.5, 15.5, 0, 180),
+
+            # Cargo ship front
+            VisionSim.Target(18.9, 12.5, 90, 270),
+            VisionSim.Target(18.9, 14.5, 90, 270),
         ]
 
         self.vision = VisionSim(
