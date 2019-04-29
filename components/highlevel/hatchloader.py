@@ -66,25 +66,31 @@ class HatchLoader(StateMachine):
     @state()
     def lowerFinger(self):
         self.finger.setEnabled(False)
+        self.next_state('initAlign')
+    
+    @state()
+    def initAlign(self):
+        self.drivetrain.forward_rotation_controller.setSetpoint(0)
         self.next_state('align')
     
-    def getStationPosition(self):
-        # Only continue if a target is found, else send haptic feedback
-        if self.target[0]:
-            # return 0.8, self.rotation_smoother.Feed(self.target[1] * 0.1)
-            if abs(self.target[1]) > config["loading_limits"]["min_angle"]:
-                return config["loading_limits"]["tracking_speed"], self.target[1] * 0.1
-            else:
-                return config["loading_limits"]["ontrack_speed"], 0.0
-        else:
-            self.console.log("Lost track of loading station")
-            return 0.0, 0.0
+    # def getStationPosition(self):
+    #     # Only continue if a target is found, else send haptic feedback
+    #     if self.target[0]:
+    #         # return 0.8, self.rotation_smoother.Feed(self.target[1] * 0.1)
+    #         if abs(self.target[1]) > config["loading_limits"]["min_angle"]:
+    #             return config["loading_limits"]["tracking_speed"], self.target[1] * 0.1
+    #         else:
+    #             return config["loading_limits"]["ontrack_speed"], 0.0
+    #     else:
+    #         self.console.log("Lost track of loading station")
+    #         return 0.0, 0.0
 
     @timed_state(duration=2.0, next_state='raiseFinger')
     def align(self):
-        speed, rotation = self.getStationPosition()
+        # speed, rotation = self.getStationPosition()
         if (self.target[2] > config["loading_limits"]["min_distance"] and self.target[0]) or not self.target[0]:
-            self.drivetrain.arcadeDrive(speed, rotation)
+            # self.drivetrain.arcadeDrive(speed, rotation)
+            self.drivetrain.driveAndRotateToSetpoint(self.target[1]*-1)
         else:
             self.next_state('raiseFinger')
     

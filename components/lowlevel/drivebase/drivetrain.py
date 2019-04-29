@@ -25,12 +25,17 @@ class DriveTrain:
         self.gyro.reset()
 
         self.rotation_controller = PIDController(0.01, 0, 0)
+        self.forward_rotation_controller = PIDController(0.01, 0, 0)
         
         self.bang_bang_ticks_offset = 0
     
     def rotateToSetpoint(self):
         rotation = self.rotation_controller.Feed(self.gyro.getAngle())
         self.arcadeDrive(0.0, rotation)
+    
+    def driveAndRotateToSetpoint(self, camera_angle):
+        rotation = self.forward_rotation_controller.Feed(camera_angle)
+        self.arcadeDrive(0.5, rotation)
     
     def bangBangToTicks(self, ticks, speed):
         if self.left_gearbox.front.getSelectedSensorPosition() - self.bang_bang_ticks_offset < ticks:
