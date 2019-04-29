@@ -24,8 +24,8 @@ class DriveTrain:
         self.gyro = AHRS.create_spi()
         self.gyro.reset()
 
-        self.rotation_controller = PIDController(0.01, 0, 0)
-        self.forward_rotation_controller = PIDController(0.01, 0, 0)
+        self.rotation_controller = PIDController(config["drivetrain"]["rotation_pid"]["p"], config["drivetrain"]["rotation_pid"]["i"], config["drivetrain"]["rotation_pid"]["d"])
+        self.forward_rotation_controller = PIDController(config["drivetrain"]["forward_rotation_pid"]["p"], config["drivetrain"]["forward_rotation_pid"]["i"], config["drivetrain"]["forward_rotation_pid"]["d"])
         
         self.bang_bang_ticks_offset = 0
     

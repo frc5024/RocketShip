@@ -1,5 +1,15 @@
 config = {
     "drivetrain": {
+        "rotation_pid": {
+            "p": 0.01,
+            "i": 0,
+            "d": 0
+        },
+        "forward_rotation_pid": {
+            "p": 0.01,
+            "i": 0,
+            "d": 0
+        },
         "motors":{
             "lf":1,
             "lr":2,
