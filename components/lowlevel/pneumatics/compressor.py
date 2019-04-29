@@ -6,7 +6,7 @@ class Compressor:
     """Wrapper around wpilib compressor"""
 
     def __init__(self):
-        self.compressor = wpilib.Compressor()
+        self.compressor = wpilib.Compressor(0)
 
         # Force the compressor to ignore enable signals from the pressure switch
         # This ensures the the compressor does not automatically turn on

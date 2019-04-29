@@ -9,6 +9,9 @@ from components.lowlevel.pneumatics.finger import Finger
 
 from networktables.util import ntproperty
 from common.slewlimiter import MultipleSlewLimiter
+from networktables import NetworkTables
+
+NetworkTables.initialize()
 
 
 class HatchLoader(StateMachine):
@@ -51,7 +54,7 @@ class HatchLoader(StateMachine):
     @state()
     def detectStation(self):
         # Only continue if a target is found, else send haptic feedback
-        if self.target[0]:
+        if self.target[0] or True:
             self.console.log(f"Prelim rotation point set to {self.target[1]} degrees")
             self.drivetrain.rotation_controller.setSetpoint(self.drivetrain.gyro.getAngle() + self.target[1])
             self.next_state('turn')
@@ -122,4 +125,4 @@ class HatchLoader(StateMachine):
     def done(self):
         super().done()
         self.led_ring.setEnabled(False)
-        self.xboxcontroller.setRumble(wpilib.interfaces.GenericHID.RumbleType.kRightRumble, 0.0)
+        self.xboxcontroller.setRumble(wpilib.interfaces.GenericHID.RumbleType.kLeftRumble, 0.0)
